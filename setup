@@ -4,12 +4,21 @@
 ## Symlinks configuration files to the proper locations
 
 from pathlib import Path
-
+import os 
 ## User Configuration
 # key = destination
 # value = list of files to symlink into destination
 FILES: dict[str : list[str]] = {"~/": [".zshrc", ".aliases"]}
 
+def install_zsh_plugins():
+    if not Path('~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh').expanduser().exists():
+        # https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
+        print("Installing zsh-autosuggestions")
+        os.system("git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions")
+    if not Path('~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh').expanduser().exists():
+        # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
+        print("Installing zsh-syntax-highlighting")
+        os.system("git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting")
 
 ## Utility functions
 def symlinkable(file: Path, target: Path) -> bool:
@@ -32,7 +41,9 @@ def symlinkable(file: Path, target: Path) -> bool:
 
 ## Main function
 def main():
-    cwd = Path.cwd()
+    install_zsh_plugins()
+    
+    cwd = Path.cwd() / "files"
 
     parsedFiles: list[tuple[Path, Path]] = []
     errors = []
@@ -59,6 +70,8 @@ def main():
             print(f"Symlinking {file} to {symlink_file}")
 
             symlink_file.symlink_to(file)
+
+    print("Setup done. Don't forget to change the login shell to zsh.")
 
 
 if __name__ == "__main__":

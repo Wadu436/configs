@@ -1,7 +1,3 @@
-## TODO:
-## add zsh-autosuggestions and zsh-syntax-highlighting
-## configure tab complete where you can navigate with arrow keys
-
 # The following lines were added by compinstall
 
 zstyle ':completion:*' completer _complete _ignored
@@ -91,6 +87,10 @@ function setup_keybinds {
 setup_git
 setup_keybinds
 
+# Load plugins
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Set prompt
 PROMPT='%B%n:%F{blue}%1~/%f${vcs_info_msg_0_}%b $ '
 RPROMPT='%B[%*]%b'
 
@@ -103,3 +103,11 @@ export PATH="$HOME/.local/bin:$PATH"
 # Set editor
 export VISUAL=vim
 export EDITOR="$VISUAL"
+
+# Load zsh-syntax-highlighting
+# Should be at the end of the file as per https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Menu select tab complete
+# https://unix.stackexchange.com/questions/470714/replicate-oh-my-zsh-directory-tab-completion-selection-with-arrow-keys
+zstyle ':completion:*' menu select  
