@@ -34,3 +34,14 @@ alias ldir="ls -l | egrep '^d'" # directories only
 alias h="history | grep "
 
 alias mx='chmod a+x'
+
+alias gs="git status"
+alias gpl="git pull"
+alias gps="git push"
+alias gpsu="git push -u origin"
+alias gpp="gpl && gpsh"
+alias ga="git add"
+alias gcm="git commit -m"
+alias gb="git branch"
+alias gc="git checkout"
+alias gcb="gc -b"
