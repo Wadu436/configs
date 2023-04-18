@@ -8,7 +8,7 @@ import os
 ## User Configuration
 # key = destination
 # value = list of files to symlink into destination
-FILES: dict[str : list[str]] = {"~/": [".zshrc", ".aliases"]}
+FILES: dict[str : list[str]] = {"~/": [".zshrc", ".aliases", ".vimrc"]}
 
 def install_zsh_plugins():
     if not Path('~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh').expanduser().exists():
